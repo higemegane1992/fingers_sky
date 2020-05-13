@@ -19,6 +19,9 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
+  host: <%= ENV.fetch("POSTGRES_DB") { 'db' } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'password' } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -81,5 +84,3 @@ test:
 production:
   <<: *default
   database: fingers_sky_production
-  username: fingers_sky
-  password: <%= ENV['FINGERS_SKY_DATABASE_PASSWORD'] %>
