@@ -48,8 +48,12 @@ jobs:
             bundle exec rails db:migrate
             bundle exec rails db:schema:load
       - run:
-          name: Parallel RSpec
-          command: bundle exec rspec
+          name: RSpec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+            bundle exec rspec
 
       # Save artifacts
       - store_test_results:
