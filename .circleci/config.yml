@@ -49,7 +49,7 @@ jobs:
             bundle exec rails db:schema:load
       - run:
           name: Parallel RSpec
-          command: bin/rails test
+          command: bundle exec rspec
 
       # Save artifacts
       - store_test_results:
