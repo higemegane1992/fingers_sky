@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[new edit create update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def index
     @events = Event.all
@@ -36,11 +38,10 @@ class EventsController < ApplicationController
   end
 
   private
+
   def correct_user
     event = Event.find(params[:id])
-    if event.user_id != current_user.id
-      redirect_to event_path, alert: 'ログイン中のユーザーには権限がありません'
-    end
+    redirect_to event_path, alert: 'ログイン中のユーザーには権限がありません' if event.user_id != current_user.id
   end
 
   def event_params
