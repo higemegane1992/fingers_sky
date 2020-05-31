@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   root 'statics#index'
 
   resources :events
+
+  resources :users, only: [:show]
 end

@@ -1,0 +1,25 @@
+<% @events.each do |event| %>
+  <div class="col-sm-6 col-md-4 mb-4">
+    <div class="card">
+      <% if event.image %>
+        <img src="..." class="card-img-top">
+      <% end %>
+      <div class="card-body">
+        <p class="card-text">
+          @<%= @site_address %><small class="text-muted ml-2"><%= event.updated_at %></small>
+        </p>
+        <h2 class="card-title"><%= event.title %></h2>
+        <p class="card-text">
+          <small class="text-muted">日時: <%= event.date %></small>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">場所: <%= event.address %></small>
+        </p>
+        <%= link_to '詳細', event_path(event), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="col-12">
+  <%= paginate(@events) %>
+</div>
