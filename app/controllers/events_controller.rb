@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :correct_user, only: %i[edit update destroy]
 
   def index
-    @events = Event.all
+    @events = Event.all.order('id DESC')
   end
 
   def new
