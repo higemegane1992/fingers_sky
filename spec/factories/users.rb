@@ -8,6 +8,6 @@ FactoryBot.define do
     email                 { Faker::Internet.email }
     password              { pass }
     password_confirmation { pass }
-    user_name          { Faker::Internet.username }
+    user_name             { Faker::Internet.username }
   end
 end
