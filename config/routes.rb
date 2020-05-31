@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   end
 
   root 'statics#index'
+
+  resources :events
 end

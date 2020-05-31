@@ -17,11 +17,24 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="#">Home  </a>
+        <%# <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#">Home</a>
           <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-        </div>
+        </div> %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'ホーム', root_path, class: 'nav-link'%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarEvent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              イベント
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarEvent">
+              <%= link_to 'イベント一覧', events_path, class: 'dropdown-item'%>
+              <%= link_to 'イベントの作成', new_event_path, class: 'dropdown-item'%>
+            </div>
+          </li>
+        </ul>
         <div class="ml-auto">
           <% if user_signed_in? %>
             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#acountModal">
@@ -60,25 +73,27 @@
       </div>
     <% end %>
     <div class="container">
-      <div class="col-12">
-        <% if notice %>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <%= notice %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <% end %>
-        <% if alert %>
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <%= alert %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <% end %>
+      <div class="row">
+        <div class="col-12">
+          <% if notice %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= notice %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% end %>
+          <% if alert %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= alert %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% end %>
+        </div>
+        <%= yield %>
       </div>
-      <%= yield %>
     </div>
   </body>
 </html>

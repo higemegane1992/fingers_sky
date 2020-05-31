@@ -34,6 +34,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'dotenv-rails'
+gem 'kaminari'
 gem 'public_suffix', '>= 4.0.5'
 gem 'react-rails'
 
@@ -42,6 +43,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance'

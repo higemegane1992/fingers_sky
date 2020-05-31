@@ -13,4 +13,6 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
   validates :site_title, presence: true
   validates :site_address, presence: true, uniqueness: true
+
+  has_many :events
 end
