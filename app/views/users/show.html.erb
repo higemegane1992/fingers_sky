@@ -6,7 +6,8 @@
       <% end %>
       <div class="card-body">
         <p class="card-text">
-          @<%= @user_name %><small class="text-muted ml-2"><%= event.updated_at %></small>
+          <%= link_to '@' + @user.user_name, user_path(@user) %>
+          <small class="text-muted ml-2"><%= event.updated_at %></small>
         </p>
         <h2 class="card-title"><%= event.title %></h2>
         <p class="card-text">
