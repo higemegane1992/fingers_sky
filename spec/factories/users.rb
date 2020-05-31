@@ -8,7 +8,6 @@ FactoryBot.define do
     email                 { Faker::Internet.email }
     password              { pass }
     password_confirmation { pass }
-    site_title            { Faker::Internet.username(specifier: 'Nancy Johnson', separators: %w[. _ -]) }
-    site_address          { Faker::Internet.username }
+    user_name             { Faker::Internet.username }
   end
 end

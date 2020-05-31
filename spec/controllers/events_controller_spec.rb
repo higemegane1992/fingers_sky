@@ -49,7 +49,7 @@ describe EventsController, type: :controller do
         expect(assigns(:event)).to eq event
       end
 
-      it 'edit.html.erbに遷移すること' do
+      it 'show.html.erbに遷移すること' do
         event = create(:event)
         get :show, params: { id: event }
         expect(response).to render_template :show
@@ -63,7 +63,7 @@ describe EventsController, type: :controller do
         expect(assigns(:event)).to eq event
       end
 
-      it 'edit.html.erbに遷移すること' do
+      it 'show.html.erbに遷移すること' do
         event = create(:event)
         get :show, params: { id: event }
         expect(response).to render_template :show

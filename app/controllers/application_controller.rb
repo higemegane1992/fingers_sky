@@ -12,16 +12,14 @@ class ApplicationController < ActionController::Base
       :sign_up, keys: %i[
         last_name
         first_name
-        site_title
-        site_address
+        user_name
       ]
     )
     devise_parameter_sanitizer.permit(
       :account_update, keys: %i[
         last_name
         first_name
-        site_title
-        site_address
+        user_name
       ]
     )
   end

@@ -11,8 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
-  validates :site_title, presence: true
-  validates :site_address, presence: true, uniqueness: true
+  validates :user_name, presence: true, uniqueness: true
 
   has_many :events
 end

@@ -32,12 +32,8 @@
           <%= f.password_field :password_confirmation, class: "form-control", id: "password-confirmation" %>
         </div>
         <div class="form-group">
-          <%= f.label "サイトタイトル", for: "site_title" %><br />
-          <%= f.text_field :site_title, class: "form-control", id: "site_title" %>
-        </div>
-        <div class="form-group">
-          <%= f.label "サイトアドレス", for: "site_address" %><br />
-          <%= f.text_field :site_address, class: "form-control", id: "site_address" %>
+          <%= f.label "ユーザーネーム", for: "user-name" %><br />
+          <%= f.text_field :user_name, class: "form-control", id: "user-name" %>
         </div>
         <div class="actions text-right">
           <%= f.submit "新規登録", class: "btn btn-primary" %>

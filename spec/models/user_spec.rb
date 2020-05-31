@@ -60,23 +60,17 @@ describe User do
         expect(user.errors[:password_confirmation]).to include('を入力してください')
       end
 
-      it 'サイトタイトルの未入力' do
-        user = build(:user, site_title: nil)
+      it 'ユーザーネームの未入力' do
+        user = build(:user, user_name: nil)
         user.valid?
-        expect(user.errors[:site_title]).to include('を入力してください')
+        expect(user.errors[:user_name]).to include('を入力してください')
       end
 
-      it 'サイトアドレスの未入力' do
-        user = build(:user, site_address: nil)
-        user.valid?
-        expect(user.errors[:site_address]).to include('を入力してください')
-      end
-
-      it 'サイトアドレスの重複' do
+      it 'ユーザーネームの重複' do
         user = create(:user)
-        another_user = build(:user, site_address: user.site_address)
+        another_user = build(:user, user_name: user.user_name)
         another_user.valid?
-        expect(another_user.errors[:site_address]).to include('はすでに存在します')
+        expect(another_user.errors[:user_name]).to include('はすでに存在します')
       end
     end
   end

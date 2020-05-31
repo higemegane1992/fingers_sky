@@ -15,7 +15,8 @@
         </div>
       <% end %>
       <p class="card-text">
-        @<%= @event.user.site_address %><small class="text-muted ml-2"><%= @event.updated_at %></small>
+        <%= link_to '@' + @event.user.user_name, user_path(@event.user) %>
+        <small class="text-muted ml-2"><%= @event.updated_at %></small>
       </p>
       <p class="card-text">
         <small class="text-muted">概要: </small>
