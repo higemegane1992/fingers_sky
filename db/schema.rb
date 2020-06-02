@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 2020_05_31_143753) do
   end
 
   create_table "participants", force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "user_id"
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id", "user_id"], name: "index_participants_on_event_id_and_user_id", unique: true
     t.index ["event_id"], name: "index_participants_on_event_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
@@ -53,4 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_31_143753) do
   end
 
   add_foreign_key "events", "users"
+  add_foreign_key "participants", "events"
+  add_foreign_key "participants", "users"
 end
