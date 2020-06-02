@@ -17,6 +17,8 @@ services:
       context: .
       dockerfile: ./docker/ruby/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec pumactl start"
+    stdin_open: true
+    tty: true
     volumes:
       - .:/fingers_sky
       - sockets:/fingers_sky/tmp/sockets
