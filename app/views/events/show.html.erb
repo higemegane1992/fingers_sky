@@ -1,21 +1,11 @@
-<div class="col-12">
+<div class="col-12 mb-4">
   <div class="card">
     <h1 class="card-header">
       <%= @event.title %>
     </h1>
     <div class="card-body">
-      <% if user_signed_in? && current_user.id == @event.user_id %>
-        <div class="position-absolute" style="right:20px;">
-          <%= link_to edit_event_path do %>
-            <i class="fas fa-edit"></i>
-          <% end %>
-          <%= link_to event_path(@event), method: :delete do %>
-            <i class="fas fa-trash"></i>
-          <% end %>
-        </div>
-      <% end %>
       <p class="card-text">
-        <%= link_to '@' + @event.user.user_name, user_path(@event.user) %>
+        <%= link_to "@#{@event.user.user_name}", user_path(@event.user) %>
         <small class="text-muted ml-2"><%= @event.updated_at %></small>
       </p>
       <p class="card-text">
@@ -31,11 +21,75 @@
       </p>
       <p class="card-text"><%= @event.address %></p>
       <div class="actions text-right">
-        <%= link_to '戻る', events_path, class: 'btn btn-outline-primary' %>
-        <% if user_signed_in? && current_user.id != @event.user_id %>
-          <%= link_to '参加する', class: 'btn btn-primary' %>
+        <% if user_signed_in? %>
+          <% if current_user.id == @event.user_id %>
+            <%= link_to edit_event_path, class: 'btn btn-primary' do %>
+              <i class="fas fa-edit mr-2"></i>編集する
+            <% end %>
+            <%= link_to event_path(@event), method: :delete, class: 'btn btn-primary' do %>
+              <i class="fas fa-trash mr-2"></i>削除する
+            <% end %>
+          <% else %>
+            <% if (@event.participants & current_user.participants).empty? %>
+              <%= form_with(model: [@event, @participant], local: true) do |f| %>
+                <%= f.submit "参加する", class: 'btn btn-primary' %>
+              <% end %>
+            <% else %>
+              <%= link_to "キャンセルする", event_participant_path(@event), method: :delete, class: 'btn btn-primary' %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+            参加する
+          </button>
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-left">
+                  イベントの参加にはログインもしくは会員登録が必要です
+                </div>
+                <div class="modal-footer">
+                  <%= link_to "ログイン", new_user_session_path, method: :get, class: 'btn btn-primary' %>
+                  <%= link_to "新規登録", new_user_registration_path, method: :get, class: 'btn btn-primary' %>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<% if user_signed_in? %>
+  <% if current_user.id == @event.user_id || (@event.participants & current_user.participants).present? %>
+    <div class="col-sm-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          参加者
+        </div>
+        <ul class="list-group list-group-flush">
+          <% @event.participants.each do |participant| %>
+            <li class="list-group-item"><%= participant.user.user_name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          メッセージ
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
