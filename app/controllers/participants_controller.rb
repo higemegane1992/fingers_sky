@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParticipantsController < ApplicationController
   def create
     participant = Participant.create(participant_params)
@@ -11,7 +13,8 @@ class ParticipantsController < ApplicationController
   end
 
   private
+
   def participant_params
-    params.permit().merge(user_id: current_user.id, event_id: params[:event_id])
+    params.permit.merge(user_id: current_user.id, event_id: params[:event_id])
   end
 end
