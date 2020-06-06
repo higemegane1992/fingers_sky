@@ -47,7 +47,7 @@
               <% end %>
             <% end %>
             <% if @events.length == 12 %>
-              <a hreef="#" class="list-group-item list-group-item-action text-center">もっと見る</a>
+              <%= link_to "もっと見る", user_hosts_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
             <% end %>
           <% end %>
         </div>
@@ -69,7 +69,7 @@
               <% end %>
             <% end %>
             <% if @participants.length == 12 %>
-              <a hreef="#" class="list-group-item list-group-item-action text-center">もっと見る</a>
+              <%= link_to "もっと見る", user_guests_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
             <% end %>
           <% end %>
         </div>

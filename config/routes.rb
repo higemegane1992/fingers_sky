@@ -17,5 +17,8 @@ Rails.application.routes.draw do
     resources :participants, only: %i[create destroy]
   end
 
-  resources :users, only: [:show]
+  resources :users, only: :show do
+    resources :hosts, only: :index
+    resources :guests, only: :index
+  end
 end
