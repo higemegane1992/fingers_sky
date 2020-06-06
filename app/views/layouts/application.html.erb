@@ -33,9 +33,9 @@
         </ul>
         <div class="ml-auto">
           <% if user_signed_in? %>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#acountModal">
+            <%= link_to user_path(current_user.id), method: :get, class: 'btn btn-outline-primary' do %>
               <i class="fas fa-user-circle mr-2"></i><%= current_user.first_name %>
-            </button>
+            <% end %>
           <% else %>
             <%= link_to "ログイン", new_user_session_path, method: :get, class: 'btn btn-outline-primary' %>
             <%= link_to "新規登録", new_user_registration_path, method: :get, class: 'btn btn-outline-primary' %>
@@ -43,30 +43,6 @@
         </div>
       </div>
     </nav>
-    <% if user_signed_in? %>
-      <div class="modal fade" id="acountModal" tabindex="-1" role="dialog" aria-labelledby="acountModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="acountModalLabel"><%= current_user.last_name + ' ' + current_user.first_name %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">メールアドレス: <%= current_user.email %></li>
-                <li class="list-group-item">ユーザーネーム: <%= current_user.user_name %></li>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <%= link_to "編集", edit_user_registration_path, method: :get, class: 'btn btn-primary' %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
     <div class="container">
       <div class="row">
         <div class="col-12">
