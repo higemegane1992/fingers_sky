@@ -10,7 +10,7 @@ class ParticipantsController < ApplicationController
     participants.each do |participant|
       user_ids.push(participant.user_id)
     end
-    @users = User.where(:id => user_ids).order('id DESC').page(params[:page]).per(30)
+    @users = User.where(id: user_ids).order('id DESC').page(params[:page]).per(30)
   end
 
   def create

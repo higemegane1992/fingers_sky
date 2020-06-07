@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ParticipantsController, type: :controller do
@@ -15,8 +17,8 @@ describe ParticipantsController, type: :controller do
         participants = create_list(:participant, 3, event_id: event.id)
         participants.push(participant)
         users = []
-        participants.each do |participant|
-          users.push(participant.user)
+        participants.each do |user|
+          users.push(user.user)
         end
         get :index, params: { event_id: event.id }
         expect(assigns(:users)).to match(users.sort { |a, b| b.id <=> a.id })
@@ -33,7 +35,7 @@ describe ParticipantsController, type: :controller do
       before do
         login_user user
       end
-      
+
       it 'index.html.erbに遷移すること' do
         participant = create(:participant, event_id: event.id)
         get :index, params: { event_id: event.id }
