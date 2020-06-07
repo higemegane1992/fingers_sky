@@ -7,4 +7,5 @@ class Event < ApplicationRecord
   validates :address, presence: true
 
   belongs_to :user
+  has_many :participants
 end

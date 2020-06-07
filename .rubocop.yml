@@ -43,3 +43,7 @@ Style/HashTransformValues:
 
 Style/SlicingWithRange:
   Enabled: true
+
+Lint/UselessAssignment:
+  Exclude: 
+    - 'spec/**/*_spec.rb'

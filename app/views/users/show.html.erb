@@ -1,26 +1,121 @@
-<% @events.each do |event| %>
-  <div class="col-sm-6 col-md-4 mb-4">
-    <div class="card">
-      <% if event.image %>
-        <img src="..." class="card-img-top">
-      <% end %>
-      <div class="card-body">
-        <p class="card-text">
-          <%= link_to '@' + @user.user_name, user_path(@user) %>
-          <small class="text-muted ml-2"><%= event.updated_at %></small>
-        </p>
-        <h2 class="card-title"><%= event.title %></h2>
-        <p class="card-text">
-          <small class="text-muted">日時: <%= event.date %></small>
-        </p>
-        <p class="card-text">
-          <small class="text-muted">場所: <%= event.address %></small>
-        </p>
-        <%= link_to '詳細', event_path(event), class: 'btn btn-primary' %>
+<div class="col-md-3">
+  <div class="nav nav-pills d-flex mb-3 bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center active" id="v-pills-host-tab" data-toggle="pill" href="#v-pills-host" role="tab" aria-controls="v-pills-host" aria-selected="true">
+      <i class="far fa-hand-pointer mr-2"></i>
+      <span class="d-none d-md-inline-block">
+        主催イベント
+      </span>
+    </a>
+    <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center" id="v-pills-guest-tab" data-toggle="pill" href="#v-pills-guest" role="tab" aria-controls="v-pills-guest" aria-selected="false">
+      <i class="far fa-hand-paper mr-2"></i>
+      <span class="d-none d-md-inline-block">
+        参加イベント
+      </span>
+    </a>
+    <% if current_user == @user%>
+      <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+        <i class="far fa-envelope mr-2"></i>
+        <span class="d-none d-md-inline-block">
+          メッセージ
+        </span>
+      </a>
+      <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+        <i class="far fa-user-circle mr-2"></i>
+          <span class="d-none d-md-inline-block">
+            設定
+          </span>
+        </i>
+      </a>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-9">
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-host" role="tabpanel" aria-labelledby="v-pills-host-tab">
+      <div class="card">
+        <div class="card-header d-block d-md-none">
+          主催イベント
+        </div>
+        <div class="list-group list-group-flush">
+          <% if @events.length == 0 %>
+            <div class="list-group-item text-center">主催しているイベントはありません</div>
+          <% elsif %>
+            <% @events.each do |event| %>
+              <%= link_to event_path(event), class: 'list-group-item list-group-item-action' do %>
+                <p><%= event.title %></p>
+                <small class="text-muted ml-2"><%= event.updated_at %></small>
+              <% end %>
+            <% end %>
+            <% if @events.length == 12 %>
+              <%= link_to "もっと見る", user_hosts_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
+    <div class="tab-pane fade" id="v-pills-guest" role="tabpanel" aria-labelledby="v-pills-guest-tab">
+      <div class="card">
+        <div class="card-header d-block d-md-none">
+          参加イベント
+        </div>
+        <div class="list-group list-group-flush">
+          <% if @participants.length == 0 %>
+            <div class="list-group-item text-center">参加しているイベントはありません</div>
+          <% elsif %>
+            <% @participants.each do |participant| %>
+              <%= link_to event_path(participant.event), class: 'list-group-item list-group-item-action' do %>
+                <p><%= participant.event.title %></p>
+                <small class="text-muted ml-2"><%= participant.event.updated_at %></small>
+              <% end %>
+            <% end %>
+            <% if @participants.length == 12 %>
+              <%= link_to "もっと見る", user_guests_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% if current_user == @user%>
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+        <div class="card">
+          <div class="card-header d-block d-md-none">
+            メッセージ
+          </div>
+          <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action">Cras justo odio</a>
+            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+            <a href="#" class="list-group-item list-group-item-action">Cras justo odio</a>
+            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+        <div class="card">
+          <div class="card-header d-block d-md-none">
+            設定
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <small>名前: </small>
+              <p><%= "#{@user.last_name} #{@user.first_name}" %></p>
+            </li>
+            <li class="list-group-item">
+              <small>メールアドレス: </small>
+              <p><%= @user.email %></p>
+            </li>
+            <li class="list-group-item">
+              <small>ユーザーネーム: </small>
+              <p><%= @user.user_name %></p>
+            </li>
+            <li class="list-group-item text-right">
+              <%= link_to "編集", edit_user_registration_path, method: :get, class: 'card-link' %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'card-link' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<div class="col-12">
-  <%= paginate(@events) %>
 </div>
