@@ -72,11 +72,18 @@
         <div class="card-header">
           参加者
         </div>
-        <ul class="list-group list-group-flush">
-          <% @event.participants.each do |participant| %>
-            <li class="list-group-item"><%= participant.user.user_name %></li>
+        <div class="list-group list-group-flush">
+          <% if @event.participants.length == 0 %>
+            <div class="list-group-item text-center">参加者はいません</div>
+          <% elsif %>
+            <% @event.participants.first(12).each do |participant| %>
+              <%= link_to participant.user.user_name, user_path(participant.user), method: :get, class: 'list-group-item list-group-item-action' %>
+            <% end %>
+            <% if @event.participants.length >= 12 %>
+              <%= link_to "もっと見る", event_participants_path(@event), method: :get, class: 'list-group-item list-group-item-action text-center' %>
+            <% end %>
           <% end %>
-        </ul>
+        </div>
       </div>
     </div>
     <div class="col-sm-6 mb-4">

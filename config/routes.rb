@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root 'statics#index'
 
   resources :events do
-    resources :participants, only: %i[create destroy]
+    resources :participants, only: %i[index create destroy]
   end
 
   resources :users, only: :show do
