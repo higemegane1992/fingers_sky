@@ -5,7 +5,6 @@ class ParticipantsController < ApplicationController
   before_action :correct_user, only: :index
 
   def index
-    @event = Event.find(params[:event_id])
     user_ids = []
     participants = Participant.where(event_id: params[:event_id])
     participants.each do |participant|
