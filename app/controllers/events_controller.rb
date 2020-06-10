@@ -20,6 +20,12 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @participant = Participant.new
+    @disabled = 'disabled'
+    if user_signed_in?
+      if current_user == @event.user || @event.guests.include?(current_user)
+        @disabled = ''
+      end
+    end
   end
 
   def edit
