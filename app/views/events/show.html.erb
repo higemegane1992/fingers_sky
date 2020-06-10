@@ -22,7 +22,7 @@
       <p class="card-text"><%= @event.address %></p>
       <div class="actions text-right">
         <% if user_signed_in? %>
-          <% if current_user.id == @event.user_id %>
+          <% if current_user == @event.user %>
             <%= link_to edit_event_path, class: 'btn btn-primary' do %>
               <i class="fas fa-edit mr-2"></i>編集する
             <% end %>
@@ -30,7 +30,7 @@
               <i class="fas fa-trash mr-2"></i>削除する
             <% end %>
           <% else %>
-            <% if (@event.participants & current_user.participants).empty? %>
+            <% if @event.guests.exclude?(current_user) %>
               <%= form_with(model: [@event, @participant], local: true) do |f| %>
                 <%= f.submit "参加する", class: 'btn btn-primary' %>
               <% end %>
@@ -66,20 +66,20 @@
   </div>
 </div>
 <% if user_signed_in? %>
-  <% if current_user.id == @event.user_id || (@event.participants & current_user.participants).present? %>
+  <% if current_user == @event.user || @event.guests.include?(current_user) %>
     <div class="col-sm-6 mb-4">
       <div class="card">
         <div class="card-header">
           参加者
         </div>
         <div class="list-group list-group-flush">
-          <% if @event.participants.length == 0 %>
+          <% if @event.guests.length == 0 %>
             <div class="list-group-item text-center">参加者はいません</div>
           <% elsif %>
-            <% @event.participants.first(12).each do |participant| %>
-              <%= link_to participant.user.user_name, user_path(participant.user), method: :get, class: 'list-group-item list-group-item-action' %>
+            <% @event.guests.first(12).each do |guest| %>
+              <%= link_to guest.user_name, user_path(guest), method: :get, class: 'list-group-item list-group-item-action' %>
             <% end %>
-            <% if @event.participants.length >= 12 %>
+            <% if @event.guests.length >= 2 %>
               <%= link_to "もっと見る", event_participants_path(@event), method: :get, class: 'list-group-item list-group-item-action text-center' %>
             <% end %>
           <% end %>

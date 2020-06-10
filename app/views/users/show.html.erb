@@ -37,16 +37,16 @@
           主催イベント
         </div>
         <div class="list-group list-group-flush">
-          <% if @events.length == 0 %>
+          <% if @host_events.length == 0 %>
             <div class="list-group-item text-center">主催しているイベントはありません</div>
           <% elsif %>
-            <% @events.each do |event| %>
-              <%= link_to event_path(event), class: 'list-group-item list-group-item-action' do %>
-                <p><%= event.title %></p>
-                <small class="text-muted ml-2"><%= event.updated_at %></small>
+            <% @host_events.each do |host_event| %>
+              <%= link_to event_path(host_event), class: 'list-group-item list-group-item-action' do %>
+                <p><%= host_event.title %></p>
+                <small class="text-muted ml-2"><%= host_event.updated_at %></small>
               <% end %>
             <% end %>
-            <% if @events.length == 12 %>
+            <% if @host_events.length == 12 %>
               <%= link_to "もっと見る", user_hosts_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
             <% end %>
           <% end %>
@@ -59,16 +59,16 @@
           参加イベント
         </div>
         <div class="list-group list-group-flush">
-          <% if @participants.length == 0 %>
+          <% if @guest_events.length == 0 %>
             <div class="list-group-item text-center">参加しているイベントはありません</div>
           <% elsif %>
-            <% @participants.each do |participant| %>
-              <%= link_to event_path(participant.event), class: 'list-group-item list-group-item-action' do %>
-                <p><%= participant.event.title %></p>
-                <small class="text-muted ml-2"><%= participant.event.updated_at %></small>
+            <% @guest_events.each do |guest_event| %>
+              <%= link_to event_path(guest_event), class: 'list-group-item list-group-item-action' do %>
+                <p><%= guest_event.title %></p>
+                <small class="text-muted ml-2"><%= guest_event.updated_at %></small>
               <% end %>
             <% end %>
-            <% if @participants.length == 12 %>
+            <% if @guest_events.length == 12 %>
               <%= link_to "もっと見る", user_guests_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
             <% end %>
           <% end %>

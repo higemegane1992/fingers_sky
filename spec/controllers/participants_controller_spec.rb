@@ -12,7 +12,7 @@ describe ParticipantsController, type: :controller do
         login_user user
       end
 
-      it '@usersに正しい値が入っていること' do
+      it '@participantsに正しい値が入っていること' do
         participant = create(:participant, event_id: event.id, user_id: user.id)
         participants = create_list(:participant, 3, event_id: event.id)
         participants.push(participant)
@@ -21,7 +21,7 @@ describe ParticipantsController, type: :controller do
           users.push(user.user)
         end
         get :index, params: { event_id: event.id }
-        expect(assigns(:users)).to match(users.sort { |a, b| b.id <=> a.id })
+        expect(assigns(:participants)).to match(users.sort { |a, b| b.id <=> a.id })
       end
 
       it 'index.html.erbに遷移すること' do

@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
   validates :user_name, presence: true, uniqueness: true
 
-  has_many :events
+  has_many :host_events, class_name: 'Event', foreign_key: :user_id
   has_many :participants
+  has_many :guest_events, through: :participants, source: :event
 end
