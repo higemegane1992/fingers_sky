@@ -4,16 +4,16 @@
       参加者
     </div>
     <div class="list-group list-group-flush">
-      <% if @users.length == 0 %>
+      <% if @participants.length == 0 %>
         <div class="list-group-item text-center">参加者はいません</div>
       <% elsif %>
-        <% @users.each do |user| %>
-          <%= link_to user.user_name, user_path(user), method: :get, class: 'list-group-item list-group-item-action' %>
+        <% @participants.each do |participant| %>
+          <%= link_to participant.user_name, user_path(participant), method: :get, class: 'list-group-item list-group-item-action' %>
         <% end %>
       <% end %>
     </div>
   </div>
 </div>
 <div class="col-12">
-  <%= paginate(@users) %>
+  <%= paginate(@participants) %>
 </div>

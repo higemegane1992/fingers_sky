@@ -1,26 +1,26 @@
-<% @events.each do |event| %>
+<% @guest_events.each do |guest_event| %>
   <div class="col-sm-6 col-md-4 mb-4">
     <div class="card">
-      <% if event.image %>
+      <% if guest_event.image %>
         <img src="..." class="card-img-top">
       <% end %>
       <div class="card-body">
         <p class="card-text">
-          <%= link_to "@#{event.user.user_name}", user_path(event.user) %>
-          <small class="text-muted ml-2"><%= event.updated_at %></small>
+          <%= link_to "@#{guest_event.user.user_name}", user_path(guest_event.user) %>
+          <small class="text-muted ml-2"><%= guest_event.updated_at %></small>
         </p>
-        <h2 class="card-title"><%= event.title %></h2>
+        <h2 class="card-title"><%= guest_event.title %></h2>
         <p class="card-text">
-          <small class="text-muted">日時: <%= event.date %></small>
+          <small class="text-muted">日時: <%= guest_event.date %></small>
         </p>
         <p class="card-text">
-          <small class="text-muted">場所: <%= event.address %></small>
+          <small class="text-muted">場所: <%= guest_event.address %></small>
         </p>
-        <%= link_to '詳細', event_path(event), class: 'btn btn-primary' %>
+        <%= link_to '詳細', event_path(guest_event), class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
 <% end %>
 <div class="col-12">
-  <%= paginate(@events) %>
+  <%= paginate(@guest_events) %>
 </div>
