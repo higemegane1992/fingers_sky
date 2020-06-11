@@ -9,4 +9,5 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :participants
   has_many :guests, through: :participants, source: :user
+  has_many :messages
 end
