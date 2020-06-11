@@ -91,20 +91,20 @@
       </div>
     </div>
     <% if user_signed_in? %>
-      <% if current_user == @event.user || @event.guests.include?(current_user) %>
+      <% if current_user == @event.user || @guests.include?(current_user) %>
         <div class="tab-pane fade" id="v-pills-participants" role="tabpanel" aria-labelledby="v-pills-participants-tab">
           <div class="card">
             <div class="card-header d-block d-md-none">
               参加者
             </div>
             <div class="list-group list-group-flush">
-              <% if @event.guests.length == 0 %>
+              <% if @guests.length == 0 %>
                 <div class="list-group-item text-center">参加者はいません</div>
               <% elsif %>
-                <% @event.guests.first(12).each do |guest| %>
+                <% @guests.first(12).each do |guest| %>
                   <%= link_to guest.user_name, user_path(guest), method: :get, class: 'list-group-item list-group-item-action' %>
                 <% end %>
-                <% if @event.guests.length >= 12 %>
+                <% if @guests.length >= 12 %>
                   <%= link_to "もっと見る", event_participants_path(@event), method: :get, class: 'list-group-item list-group-item-action text-center' %>
                 <% end %>
               <% end %>
@@ -117,9 +117,19 @@
               メッセージ
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+            <% if @messages.length == 0 %>
+              <div class="list-group-item text-center">メッセージはありません</div>
+            <% elsif %>
+              <% @messages.each do |message| %>
+                <%= link_to user_messages_path(current_user), class: 'list-group-item list-group-item-action' do %>
+                  <p><%= message.subject %></p>
+                  <small class="text-muted ml-2"><%= message.updated_at %></small>
+                <% end %>
+              <% end %>
+              <% if @messages.length == 12 %>
+                <%= link_to "もっと見る", user_messages_path(current_user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
+              <% end %>
+            <% end %>
             </ul>
           </div>
         </div>

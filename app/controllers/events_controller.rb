@@ -19,12 +19,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @participant = Participant.new
     @disabled = if user_signed_in? && current_user == @event.user || @event.guests.include?(current_user)
                   ''
                 else
                   'disabled'
                 end
+    @participant = Participant.new
+    @guests = @event.guests
+    @messages = @event.messages.order('id DESC').limit(12)
   end
 
   def edit
