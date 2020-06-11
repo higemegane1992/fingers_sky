@@ -5,5 +5,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @host_events = @user.host_events.order('id DESC').limit(12)
     @guest_events = @user.guest_events.order('id DESC').limit(12)
+    @messages = @user.messages.order('id DESC').limit(12)
   end
 end

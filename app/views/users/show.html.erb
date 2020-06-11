@@ -82,12 +82,19 @@
             メッセージ
           </div>
           <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action">Cras justo odio</a>
-            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
-            <a href="#" class="list-group-item list-group-item-action">Cras justo odio</a>
-            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+          <% if @messages.length == 0 %>
+            <div class="list-group-item text-center">メッセージはありません</div>
+          <% elsif %>
+            <% @messages.each do |message| %>
+              <%= link_to user_messages_path(@user), class: 'list-group-item list-group-item-action' do %>
+                <p><%= message.subject %></p>
+                <small class="text-muted ml-2"><%= message.updated_at %></small>
+              <% end %>
+            <% end %>
+            <% if @messages.length == 12 %>
+              <%= link_to "もっと見る", user_messages_path(@user), method: :get, class: 'list-group-item list-group-item-action text-center' %>
+            <% end %>
+          <% end %>
           </div>
         </div>
       </div>
