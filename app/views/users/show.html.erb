@@ -86,7 +86,7 @@
             <div class="list-group-item text-center">メッセージはありません</div>
           <% elsif %>
             <% @messages.each do |message| %>
-              <%= link_to user_messages_path(@user), class: 'list-group-item list-group-item-action' do %>
+              <%= link_to "#{user_messages_path(@user)}#list-item-#{message.id}", class: 'list-group-item list-group-item-action', data: {'turbolinks' => false} do %>
                 <p><%= message.subject %></p>
                 <small class="text-muted ml-2"><%= message.updated_at %></small>
               <% end %>

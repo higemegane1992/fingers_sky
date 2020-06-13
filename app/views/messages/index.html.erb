@@ -1,29 +1,25 @@
 <div class="col-md-4 d-none d-md-block mb-4">
   <div id="messages" class="list-group scrollspy">
-    <% num = 0 %>
-    <% @messages.each do |message| %>
-      <% if num == 0 %>
-        <a class="list-group-item list-group-item-action active" href="#list-item-<%= num %>"  data-turbolinks="false"><%= message.subject %></a>
+    <% @messages.each do |message, index| %>
+      <% if index == 0 %>
+        <a class="list-group-item list-group-item-action active" href="#list-item-<%= message.id %>" data-turbolinks="false"><%= message.subject %></a>
       <% else %>
-        <a class="list-group-item list-group-item-action" href="#list-item-<%= num %>"  data-turbolinks="false"><%= message.subject %></a>
+        <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>" data-turbolinks="false"><%= message.subject %></a>
       <% end %>
-      <% num += 1 %>
     <% end %>
   </div>
 </div>
 <div class="col-md-8 mb-4">
   <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card">
     <ul class="list-group list-group-flush">
-    <% num = 0 %>
       <% @messages.each do |message| %>
-        <li id="list-item-<%= num %>" class="list-group-item">
+        <li id="list-item-<%= message.id %>" class="list-group-item">
           <%= link_to "@#{message.user.user_name}", user_path(message.user) %>
           <h2 class="card-title"><%= message.subject %></h2>
           <span class="badge badge-primary"><%= message.event.title %></span>
           <small class="text-muted ml-2"><%= message.updated_at %></small>
           <p class="card-text"><%= message.body %></p>
         </li>
-        <% num += 1 %>
       <% end %>
     </ul>
   </div>
