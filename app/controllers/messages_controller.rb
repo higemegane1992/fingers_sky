@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user
+
   def index
     @user = User.find(params[:user_id])
     @messages = @user.messages.order('id DESC').page(params[:page]).per(30)
@@ -11,6 +14,11 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def correct_user
+    user = User.find(params[:user_id])
+    redirect_to user_path(user), alert: 'ログイン中のユーザーには権限がありません' if user.id != current_user.id
+  end
 
   def message_params
     params.require(:message).permit(:subject, :body, :event_id).merge(user_id: current_user.id)
