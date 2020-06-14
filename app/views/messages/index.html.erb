@@ -40,9 +40,9 @@
     <div id="messages" class="list-group list-group-flush">
       <% @messages.each_with_index do |message, index| %>
         <% if index == 0 %>
-          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>" data-turbolinks="false"><%= message.subject %></a>
+          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>"><%= message.subject %></a>
         <% else %>
-          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>" data-turbolinks="false"><%= message.subject %></a>
+          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>"><%= message.subject %></a>
         <% end %>
       <% end %>
     </div>
