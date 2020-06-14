@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @messages = @user.messages.order('id DESC').page(params[:page]).per(30)
+    @messages = Kaminari.paginate_array((@user.sended_messages + @user.received_messages).uniq.sort.reverse).page(params[:page]).per(30)
     @message = Message.new
   end
 

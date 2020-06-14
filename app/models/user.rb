@@ -16,5 +16,6 @@ class User < ApplicationRecord
   has_many :host_events, class_name: 'Event', foreign_key: :user_id
   has_many :participants
   has_many :guest_events, through: :participants, source: :event
-  has_many :messages, through: :guest_events, source: :messages
+  has_many :sended_messages, class_name: 'Message', foreign_key: :user_id
+  has_many :received_messages, through: :guest_events, source: :messages
 end
