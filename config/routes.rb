@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     resources :hosts, only: :index
     resources :guests, only: :index
-    resources :messages, onky: :index
+    resources :messages, only: %i[index create]
   end
 end
