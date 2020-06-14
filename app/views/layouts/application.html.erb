@@ -30,6 +30,11 @@
               <%= link_to 'イベントの作成', new_event_path, class: 'dropdown-item'%>
             </div>
           </li>
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <%= link_to 'メッセージ', user_messages_path(current_user), class: 'nav-link'%>
+            <% end %> 
+          </li>
         </ul>
         <div class="ml-auto">
           <% if user_signed_in? %>
