@@ -1,0 +1,68 @@
+<div class="scrollspy col-md-4">
+  <button type="button" class="btn btn-primary w-100 mb-4" data-toggle="modal" data-target="#new">
+    新規作成
+  </button>
+  <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="newLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="newLabel">新規メッセージの作成</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@user, @message], local: true) do |f| %>
+            <div class="form-group">
+              <label for="eventFormControlSelect">送信先</label>
+              <%= f.collection_select :event_id, (@user.guest_events + @user.host_events).uniq, :id, :title, {include_blank: '選択して下さい'}, {class: 'form-control'} %>
+            </div>
+            <div class="form-group">
+              <%= f.label "件名", for: "subject" %>
+              <%= f.text_field :subject, class: "form-control", id: "subject" %>
+            </div>
+            <div class="form-group">
+              <%= f.label '本文', for: "body" %>
+              <%= f.text_area :body, class: "form-control", id: "body", rows: "10" %>
+            </div>
+            <div class="actions text-right">
+              <%= f.submit "送信", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card d-none d-md-block">
+    <div class="card-header py-0">
+      <small>メッセージボックス</small>
+    </div>
+    <div id="messages" class="list-group list-group-flush">
+      <% @messages.each_with_index do |message, index| %>
+        <% if index == 0 %>
+          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>"><%= message.subject %></a>
+        <% else %>
+          <a class="list-group-item list-group-item-action" href="#list-item-<%= message.id %>"><%= message.subject %></a>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-8 mb-4">
+  <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card">
+    <ul class="list-group list-group-flush">
+      <% @messages.each do |message| %>
+        <li id="list-item-<%= message.id %>" class="list-group-item">
+          <%= link_to "@#{message.user.user_name}", user_path(message.user) %>
+          <h2 class="card-title"><%= message.subject %></h2>
+          <span class="badge badge-primary"><%= message.event.title %></span>
+          <small class="text-muted ml-2"><%= message.updated_at %></small>
+          <p class="card-text"><%= message.body %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="col-12">
+  <%= paginate(@messages) %>
+</div>
