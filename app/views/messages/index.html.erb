@@ -15,7 +15,7 @@
           <%= form_with(model: [@user, @message], local: true) do |f| %>
             <div class="form-group">
               <label for="eventFormControlSelect">送信先</label>
-              <%= f.collection_select :event_id, @user.guest_events, :id, :title, {include_blank: '選択して下さい'}, {class: 'form-control'} %>
+              <%= f.collection_select :event_id, (@user.guest_events + @user.host_events).uniq, :id, :title, {include_blank: '選択して下さい'}, {class: 'form-control'} %>
             </div>
             <div class="form-group">
               <%= f.label "件名", for: "subject" %>
