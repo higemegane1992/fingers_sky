@@ -5,8 +5,8 @@ class ParticipantsController < ApplicationController
   before_action :correct_user, only: :index
 
   def index
-    event = Event.find(params[:event_id])
-    @participants = event.guests.order('id DESC').page(params[:page]).per(30)
+    @event = Event.find(params[:event_id])
+    @participants = @event.guests.order('id DESC').page(params[:page]).per(30)
   end
 
   def create

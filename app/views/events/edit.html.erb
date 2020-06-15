@@ -1,7 +1,7 @@
+<% provide(:title, "#{@event.title}の編集") %>
 <div class="col-12">
   <div class="card">
     <div class="card-body">
-      <h1 class="card-title">イベントの編集</h1>
       <%= form_with(model: @event, local: true) do |f| %>
         <div class="form-group">
           <%= f.label "イベントタイトル", for: "title" %>

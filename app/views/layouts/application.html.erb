@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fingers Sky</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,6 +51,9 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
+          <% if yield(:title).present? %>
+            <h1><%= yield(:title) %></h1>
+          <% end %>
           <% if notice %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               <%= notice %>

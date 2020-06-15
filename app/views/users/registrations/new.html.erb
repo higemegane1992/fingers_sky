@@ -1,7 +1,7 @@
+<% provide(:title, "新規登録") %>
 <div class="col-12">
   <div class="card">
     <div class="card-body">
-      <h1 class="card-title">新規登録</h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="form-row">

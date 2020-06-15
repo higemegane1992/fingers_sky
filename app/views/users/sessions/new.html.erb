@@ -1,7 +1,7 @@
+<% provide(:title, "ログイン") %>
 <div class="col-12">
   <div class="card">
     <div class="card-body">
-      <h1 class="card-title">ログイン</h1>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
           <%= f.label :email, for: "email" %>
