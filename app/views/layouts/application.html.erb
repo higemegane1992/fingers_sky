@@ -54,7 +54,7 @@
           <% if yield(:title).present? %>
             <h1><%= yield(:title) %></h1>
           <% end %>
-          <ol class="breadcrumb border shadow">
+          <ol class="breadcrumb border shadow py-1">
             <%= render_breadcrumbs :tag => :li, :separator => "" %>
           </ol>
           <% if notice %>
