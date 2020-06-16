@@ -6,6 +6,17 @@ body {
   margin-top: 71px !important;
 }
 
+.breadcrumb > li + li {
+  padding-left: 0.5rem;
+}
+
+.breadcrumb > li + li::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #b5acac;
+  content: "/";
+}
+
 .scrollspy {
   position: relative;
   overflow-y: auto;

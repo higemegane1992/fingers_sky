@@ -54,6 +54,9 @@
           <% if yield(:title).present? %>
             <h1><%= yield(:title) %></h1>
           <% end %>
+          <ol class="breadcrumb">
+            <%= render_breadcrumbs :tag => :li, :separator => "" %>
+          </ol>
           <% if notice %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               <%= notice %>

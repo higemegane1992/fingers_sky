@@ -3,6 +3,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit create update destroy]
   before_action :correct_user, only: %i[edit update destroy]
+  add_breadcrumb "イベント", :events_path
 
   def index
     @events = Event.all.order('id DESC').page(params[:page]).per(30)
@@ -10,6 +11,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    add_breadcrumb "新規作成"
   end
 
   def create
@@ -27,10 +29,13 @@ class EventsController < ApplicationController
     @participant = Participant.new
     @guests = @event.guests
     @messages = @event.messages.order('id DESC').limit(12)
+    add_breadcrumb "#{@event.title}"
   end
 
   def edit
     @event = Event.find(params[:id])
+    add_breadcrumb "#{@event.title}", event_path(@event)
+    add_breadcrumb "編集"
   end
 
   def update

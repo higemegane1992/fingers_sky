@@ -3,10 +3,13 @@
 class ParticipantsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: :index
+  add_breadcrumb "イベント", :events_path
 
   def index
     @event = Event.find(params[:event_id])
     @participants = @event.guests.order('id DESC').page(params[:page]).per(30)
+    add_breadcrumb "#{@event.title}", event_path(@event)
+    add_breadcrumb "参加者"
   end
 
   def create

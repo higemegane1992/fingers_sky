@@ -3,11 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  add_breadcrumb "ユーザー"
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    add_breadcrumb "登録"
+    super
+  end
 
   # POST /resource
   # def create
@@ -15,9 +17,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    add_breadcrumb "編集"
+    super
+  end
 
   # PUT /resource
   # def update

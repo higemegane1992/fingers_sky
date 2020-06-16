@@ -37,6 +37,7 @@ gem 'dotenv-rails'
 gem 'kaminari'
 gem 'public_suffix', '>= 4.0.5'
 gem 'react-rails'
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
