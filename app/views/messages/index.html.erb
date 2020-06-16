@@ -1,6 +1,6 @@
 <% provide(:title, "メッセージ") %>
 <div class="scrollspy col-md-4">
-  <button type="button" class="btn btn-primary w-100 mb-4" data-toggle="modal" data-target="#new">
+  <button type="button" class="btn btn-primary w-100 mb-4 border shadow" data-toggle="modal" data-target="#new">
     新規作成
   </button>
   <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="newLabel" aria-hidden="true">
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="card d-none d-md-block">
+  <div class="card d-none d-md-block border shadow">
     <div class="card-header py-0">
       <small>メッセージボックス</small>
     </div>
@@ -49,7 +49,7 @@
   </div>
 </div>
 <div class="col-md-8 mb-4">
-  <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card">
+  <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card border shadow">
     <ul class="list-group list-group-flush">
       <% @messages.each do |message| %>
         <li id="list-item-<%= message.id %>" class="list-group-item">

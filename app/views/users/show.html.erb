@@ -1,6 +1,6 @@
 <% provide(:title, @user.user_name) %>
 <div class="col-md-4">
-  <div class="nav nav-pills d-flex mb-3 bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <div class="nav nav-pills d-flex mb-3 bg-white border shadow rounded" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center active" id="v-pills-host-tab" data-toggle="pill" href="#v-pills-host" role="tab" aria-controls="v-pills-host" aria-selected="true">
       <i class="far fa-hand-pointer mr-2"></i>
       <span class="d-none d-md-inline-block">
@@ -33,7 +33,7 @@
 <div class="col-md-8">
   <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="v-pills-host" role="tabpanel" aria-labelledby="v-pills-host-tab">
-      <div class="card">
+      <div class="card border shadow">
         <div class="card-header d-block d-md-none">
           主催イベント
         </div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="tab-pane fade" id="v-pills-guest" role="tabpanel" aria-labelledby="v-pills-guest-tab">
-      <div class="card">
+      <div class="card border shadow">
         <div class="card-header d-block d-md-none">
           参加イベント
         </div>
@@ -78,7 +78,7 @@
     </div>
     <% if current_user == @user%>
       <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-        <div class="card">
+        <div class="card border shadow">
           <div class="card-header d-block d-md-none">
             メッセージ
           </div>
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-        <div class="card">
+        <div class="card border shadow">
           <div class="card-header d-block d-md-none">
             設定
           </div>
