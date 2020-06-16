@@ -21,8 +21,9 @@ body {
   position: relative;
   overflow-y: auto;
 }
+
 @include media-breakpoint-up(md) {
   .scrollspy {
-    max-height: calc(100vh - 149px);
+    max-height: calc(100vh - 237px);
   }
 }
