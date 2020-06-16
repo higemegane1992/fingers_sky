@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @messages = Kaminari.paginate_array((@user.sended_messages + @user.received_messages).uniq.sort.reverse).page(params[:page]).per(30)
+    @messages = Kaminari.paginate_array((@user.sended_messages + @user.received_messages).uniq.sort.reverse).page(params[:page]).per(36)
     @message = Message.new
     add_breadcrumb "#{@user.user_name}", user_path(@user)
     add_breadcrumb "メッセージ"

@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   add_breadcrumb "イベント", :events_path
 
   def index
-    @events = Event.all.order('id DESC').page(params[:page]).per(30)
+    @events = Event.all.order('id DESC').page(params[:page]).per(36)
   end
 
   def new

@@ -7,7 +7,6 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="newLabel">新規メッセージの作成</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -56,8 +55,10 @@
         <li id="list-item-<%= message.id %>" class="list-group-item">
           <%= link_to "@#{message.user.user_name}", user_path(message.user) %>
           <h2 class="card-title"><%= message.subject %></h2>
-          <span class="badge badge-primary"><%= message.event.title %></span>
-          <small class="text-muted ml-2"><%= message.updated_at %></small>
+          <p class="card-text">
+            <%= link_to message.event.title, event_path(message.event), class: 'badge badge-primary' %>
+            <small class="text-muted ml-2"><%= message.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></small>
+          </p>
           <p class="card-text"><%= message.body %></p>
         </li>
       <% end %>

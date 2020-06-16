@@ -18,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    add_breadcrumb current_user.user_name, user_path(current_user)
     add_breadcrumb "編集"
     super
   end

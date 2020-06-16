@@ -7,7 +7,7 @@ class ParticipantsController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
-    @participants = @event.guests.order('id DESC').page(params[:page]).per(30)
+    @participants = @event.guests.order('id DESC').page(params[:page]).per(36)
     add_breadcrumb "#{@event.title}", event_path(@event)
     add_breadcrumb "参加者"
   end

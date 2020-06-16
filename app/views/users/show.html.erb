@@ -1,4 +1,4 @@
-<% provide(:title, "#{@user.user_name}") %>
+<% provide(:title, @user.user_name) %>
 <div class="col-md-4">
   <div class="nav nav-pills d-flex mb-3 bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center active" id="v-pills-host-tab" data-toggle="pill" href="#v-pills-host" role="tab" aria-controls="v-pills-host" aria-selected="true">
@@ -44,7 +44,7 @@
             <% @host_events.each do |host_event| %>
               <%= link_to event_path(host_event), class: 'list-group-item list-group-item-action' do %>
                 <p><%= host_event.title %></p>
-                <small class="text-muted ml-2"><%= host_event.updated_at %></small>
+                <small class="text-muted ml-2"><%= host_event.updated_at.strftime("%Y/%m/%d") %></small>
               <% end %>
             <% end %>
             <% if @host_events.length == 12 %>
@@ -66,7 +66,7 @@
             <% @guest_events.each do |guest_event| %>
               <%= link_to event_path(guest_event), class: 'list-group-item list-group-item-action' do %>
                 <p><%= guest_event.title %></p>
-                <small class="text-muted ml-2"><%= guest_event.updated_at %></small>
+                <small class="text-muted ml-2"><%= guest_event.updated_at.strftime("%Y/%m/%d") %></small>
               <% end %>
             <% end %>
             <% if @guest_events.length == 12 %>
@@ -89,7 +89,7 @@
             <% @messages.each do |message| %>
               <%= link_to "#{user_messages_path(@user)}#list-item-#{message.id}", class: 'list-group-item list-group-item-action' do %>
                 <p><%= message.subject %></p>
-                <small class="text-muted ml-2"><%= message.updated_at %></small>
+                <small class="text-muted ml-2"><%= message.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></small>
               <% end %>
             <% end %>
             <% if @messages.length == 12 %>
@@ -104,24 +104,28 @@
           <div class="card-header d-block d-md-none">
             設定
           </div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <small>名前: </small>
-              <p><%= "#{@user.last_name} #{@user.first_name}" %></p>
-            </li>
-            <li class="list-group-item">
-              <small>メールアドレス: </small>
-              <p><%= @user.email %></p>
-            </li>
-            <li class="list-group-item">
-              <small>ユーザーネーム: </small>
-              <p><%= @user.user_name %></p>
-            </li>
-            <li class="list-group-item text-right">
-              <%= link_to "編集", edit_user_registration_path, method: :get, class: 'card-link' %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'card-link' %>
-            </li>
-          </ul>
+          <div class="card-body">
+            <p class="card-text">
+              <small class="text-muted">名前: </small>
+            </p>
+            <p class="card-text"><%= "#{@user.last_name} #{@user.first_name}" %></p>
+            <p class="card-text">
+              <small class="text-muted">メールアドレス: </small>
+            </p>
+            <p><%= @user.email %></p>
+            <p class="card-text">
+              <small class="text-muted">ユーザーネーム: </small>
+            </p>
+            <p class="card-text"><%= @user.user_name %></p>
+            <div class="actions text-right">
+              <%= link_to edit_user_registration_path, class: 'btn btn-primary' do %>
+                <i class="fas fa-edit mr-2"></i>編集する
+              <% end %>
+              <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary' do %>
+                <i class="fas fa-sign-out-alt mr-2"></i></i>ログアウト
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>

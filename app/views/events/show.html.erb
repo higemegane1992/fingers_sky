@@ -31,9 +31,9 @@
         <div class="card-body">
           <p class="card-text">
             <%= link_to "@#{@event.user.user_name}", user_path(@event.user) %>
-            <small class="text-muted ml-2"><%= @event.updated_at %></small>
+            <small class="text-muted ml-2"><%= @event.updated_at.strftime("%Y/%m/%d") %></small>
           </p>
-          <h1 class="card-title"><%= @event.title %></h1>
+          <h2 class="card-title"><%= @event.title %></h2>
           <p class="card-text">
             <small class="text-muted">概要: </small>
           </p>
@@ -41,7 +41,7 @@
           <p class="card-text">
             <small class="text-muted">日時: </small>
           </p>
-          <p class="card-text"><%= @event.date %></p>
+          <p class="card-text"><%= @event.date.strftime("%Y/%m/%d %H:%M") %></p>
           <p class="card-text">
             <small class="text-muted">場所: </small>
           </p>
@@ -124,7 +124,7 @@
               <% @messages.each do |message| %>
                 <%= link_to "#{user_messages_path(current_user)}#list-item-#{message.id}", class: 'list-group-item list-group-item-action' do %>
                   <p><%= message.subject %></p>
-                  <small class="text-muted ml-2"><%= message.updated_at %></small>
+                  <small class="text-muted ml-2"><%= message.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></small>
                 <% end %>
               <% end %>
               <% if @messages.length == 12 %>
