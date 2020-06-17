@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fingers Sky</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-secondary">
-      <a class="navbar-brand" href="#">Fingers Sky</a>
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-secondary shadow">
+      <%= link_to 'Fingers Sky', root_path, class: 'navbar-brand' %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,8 +51,14 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
+          <% if yield(:title).present? %>
+            <h1><%= yield(:title) %></h1>
+          <% end %>
+          <ol class="breadcrumb border shadow py-1">
+            <%= render_breadcrumbs :tag => :li, :separator => "" %>
+          </ol>
           <% if notice %>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show shadow" role="alert">
               <%= notice %>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -60,7 +66,7 @@
             </div>
           <% end %>
           <% if alert %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
               <%= alert %>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

@@ -1,12 +1,12 @@
+<% provide(:title, "メッセージ") %>
 <div class="scrollspy col-md-4">
-  <button type="button" class="btn btn-primary w-100 mb-4" data-toggle="modal" data-target="#new">
+  <button type="button" class="btn btn-primary w-100 mb-4 border shadow" data-toggle="modal" data-target="#new">
     新規作成
   </button>
   <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="newLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="newLabel">新規メッセージの作成</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="card d-none d-md-block">
+  <div class="card d-none d-md-block border shadow">
     <div class="card-header py-0">
       <small>メッセージボックス</small>
     </div>
@@ -49,14 +49,16 @@
   </div>
 </div>
 <div class="col-md-8 mb-4">
-  <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card">
+  <div data-spy="scroll" data-target="#messages" data-offset="0" class="scrollspy card border shadow">
     <ul class="list-group list-group-flush">
       <% @messages.each do |message| %>
         <li id="list-item-<%= message.id %>" class="list-group-item">
           <%= link_to "@#{message.user.user_name}", user_path(message.user) %>
           <h2 class="card-title"><%= message.subject %></h2>
-          <span class="badge badge-primary"><%= message.event.title %></span>
-          <small class="text-muted ml-2"><%= message.updated_at %></small>
+          <p class="card-text">
+            <%= link_to message.event.title, event_path(message.event), class: 'badge badge-primary' %>
+            <small class="text-muted ml-2"><%= message.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></small>
+          </p>
           <p class="card-text"><%= message.body %></p>
         </li>
       <% end %>

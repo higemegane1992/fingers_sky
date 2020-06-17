@@ -6,12 +6,24 @@ body {
   margin-top: 71px !important;
 }
 
+.breadcrumb > li + li {
+  padding-left: 0.5rem;
+}
+
+.breadcrumb > li + li::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #b5acac;
+  content: "/";
+}
+
 .scrollspy {
   position: relative;
   overflow-y: auto;
 }
+
 @include media-breakpoint-up(md) {
   .scrollspy {
-    max-height: calc(100vh - 149px);
+    max-height: calc(100vh - 237px);
   }
 }

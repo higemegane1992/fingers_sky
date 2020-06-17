@@ -1,7 +1,7 @@
-<div class="col-12">
-  <div class="card">
+<% provide(:title, "新規イベントの作成") %>
+<div class="col-md-8 col-lg-6 mx-auto">
+  <div class="card border shadow">
     <div class="card-body">
-      <h1 class="card-title">新規イベントの作成</h1>
       <%= form_with(model: @event, local: true) do |f| %>
         <div class="form-group">
           <%= f.label "イベントタイトル", for: "title" %>

@@ -9,7 +9,7 @@
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
 Metrics/AbcSize:
-  Max: 17
+  Max: 21
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.

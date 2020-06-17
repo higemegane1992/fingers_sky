@@ -1,64 +1,103 @@
-<div class="col-12">
-  <div class="card">
-    <div class="card-body">
-      <h1 class="card-title">プロフィールの編集</h1>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <%= f.label "姓", for: "last-name" %>
-            <%= f.text_field :last_name, class: "form-control", id: "last-name" %>
-          </div>
-          <div class="form-group col-md-6">
-            <%= f.label "名", for: "first-name" %>
-            <%= f.text_field :first_name, class: "form-control", id: "first-name" %>
-          </div>
+<% provide(:title, "#{current_user.user_name}の編集") %>
+
+<div class="col-md-4">
+  <div class="nav nav-pills d-flex mb-3 bg-white border shadow rounded" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center disabled" id="v-pills-host-tab" data-toggle="pill" href="#v-pills-host" role="tab" aria-controls="v-pills-host" aria-selected="true">
+      <i class="far fa-hand-pointer mr-2"></i>
+      <span class="d-none d-md-inline-block">
+        主催イベント
+      </span>
+    </a>
+    <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center disabled" id="v-pills-guest-tab" data-toggle="pill" href="#v-pills-guest" role="tab" aria-controls="v-pills-guest" aria-selected="false">
+      <i class="far fa-hand-paper mr-2"></i>
+      <span class="d-none d-md-inline-block">
+        参加イベント
+      </span>
+    </a>
+    <% if current_user == @user%>
+      <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center disabled" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+        <i class="far fa-envelope mr-2"></i>
+        <span class="d-none d-md-inline-block">
+          メッセージ
+        </span>
+      </a>
+      <a class="nav-link col col-md-12 text-center d-md-flex justify-content-start align-items-center active" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+        <i class="far fa-user-circle mr-2"></i>
+          <span class="d-none d-md-inline-block">
+            設定
+          </span>
+        </i>
+      </a>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-8">
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+      <div class="card border shadow">
+        <div class="card-header d-block d-md-none">
+          設定
         </div>
-        <div class="form-group">
-          <%= f.label :email, for: "email" %>
-          <%= f.email_field :email, class: "form-control", id: "email" %>
-        </div>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
-        <div class="form-group">
-          <%= f.label :password, for: "new-password" %>
-          <small class="text-muted">
-            変更がなければ空白
-            <% if @minimum_password_length %>
-              <%= @minimum_password_length %>文字以上
+        <div class="card-body">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <%= f.label "姓", for: "last-name", class: "" %>
+                <%= f.text_field :last_name, class: "form-control", id: "last-name" %>
+              </div>
+              <div class="form-group col-md-6">
+                <%= f.label "名", for: "first-name" %>
+                <%= f.text_field :first_name, class: "form-control", id: "first-name" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :email, for: "email" %>
+              <%= f.email_field :email, class: "form-control", id: "email" %>
+            </div>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>
-          </small>
-          <%= f.password_field :password, class: "form-control", id: "new-password" %>
-        </div>
+            <div class="form-group">
+              <%= f.label :password, for: "new-password" %>
+              <small class="text-muted">
+                変更がなければ空白
+                <% if @minimum_password_length %>
+                  <%= @minimum_password_length %>文字以上
+                <% end %>
+              </small>
+              <%= f.password_field :password, class: "form-control", id: "new-password" %>
+            </div>
 
-        <div class="form-group">
-          <%= f.label :password_confirmation, for: "password-confirmation" %>
-          <%= f.password_field :password_confirmation, class: "form-control", id: "password-confirmation" %>
-        </div>
+            <div class="form-group">
+              <%= f.label :password_confirmation, for: "password-confirmation" %>
+              <%= f.password_field :password_confirmation, class: "form-control", id: "password-confirmation" %>
+            </div>
 
-        <div class="form-group">
-          <%= f.label :current_password, for: "current-password" %>
-          <small class="text-muted">
-            必須
-          </small>
-          <%= f.password_field :current_password, class: "form-control", id: "current-password" %>
+            <div class="form-group">
+              <%= f.label :current_password, for: "current-password" %>
+              <small class="text-muted">
+                必須
+              </small>
+              <%= f.password_field :current_password, class: "form-control", id: "current-password" %>
+            </div>
+            <div class="form-group">
+              <%= f.label "ユーザーネーム", for: "user-name" %><br />
+              <%= f.text_field :user_name, class: "form-control", id: "user-name" %>
+            </div>
+            <div class="actions text-right">
+              <%= f.submit "保存", class: "btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label "ユーザーネーム", for: "user-name" %><br />
-          <%= f.text_field :user_name, class: "form-control", id: "user-name" %>
+        <div class="card-body">
+          <label>アカウントの削除</label>
+          <div class="text-right">
+            <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary" %>
+          </div> 
+          <%= link_to "戻る", :back %>
         </div>
-        <div class="actions text-right">
-          <%= f.submit "保存", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-    <div class="card-body">
-      <label>アカウントの削除</label>
-      <div class="text-right">
-        <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary" %>
-      </div> 
-      <%= link_to "Back", :back %>
+      </div>
     </div>
   </div>
 </div>

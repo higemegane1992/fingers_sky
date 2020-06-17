@@ -1,21 +1,24 @@
+<% provide(:title, "イベント一覧") %>
 <% @events.each do |event| %>
-  <div class="col-sm-6 col-md-4 mb-4">
-    <div class="card">
+  <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+    <div class="card h-100 border shadow">
       <% if event.image %>
         <img src="..." class="card-img-top">
       <% end %>
       <div class="card-body">
         <p class="card-text">
           <%= link_to "@#{event.user.user_name}", user_path(event.user) %>
-          <small class="text-muted ml-2"><%= event.updated_at %></small>
+          <small class="text-muted ml-2"><%= event.updated_at.strftime("%Y/%m/%d") %></small>
         </p>
         <h2 class="card-title"><%= event.title %></h2>
         <p class="card-text">
-          <small class="text-muted">日時: <%= event.date %></small>
+          <small class="text-muted">日時: <%= event.date.strftime("%Y/%m/%d") %></small>
         </p>
         <p class="card-text">
           <small class="text-muted">場所: <%= event.address %></small>
         </p>
+      </div>
+      <div class="card-footer bg-white border-top-0  text-right">
         <%= link_to '詳細', event_path(event), class: 'btn btn-primary' %>
       </div>
     </div>
