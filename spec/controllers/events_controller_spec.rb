@@ -11,7 +11,7 @@ describe EventsController, type: :controller do
         login_user user
       end
 
-      it '@eventに正しい値が入っていること' do
+      it '@eventsに正しい値が入っていること' do
         events = create_list(:event, 3)
         get :index
         expect(assigns(:events)).to match(events.sort { |a, b| b.id <=> a.id })
@@ -24,7 +24,7 @@ describe EventsController, type: :controller do
     end
 
     context 'ログインしていない場合' do
-      it '@eventに正しい値が入っていること' do
+      it '@eventsに正しい値が入っていること' do
         events = create_list(:event, 3)
         get :index
         expect(assigns(:events)).to match(events.sort { |a, b| b.id <=> a.id })

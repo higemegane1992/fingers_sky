@@ -7,6 +7,6 @@ FactoryBot.define do
     date        { '2020-05-30 09:00:00' }
     address     { 'Event Address' }
     image       { 'image' }
-    user
+    association :host, factory: :user
   end
 end

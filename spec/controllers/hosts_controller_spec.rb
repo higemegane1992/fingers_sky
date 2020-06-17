@@ -7,9 +7,9 @@ describe HostsController, type: :controller do
 
   describe 'GET #index' do
     it '@eventsに正しい値が入っていること' do
-      hosts = create_list(:event, 3, user_id: user.id)
+      host_events = create_list(:event, 3, user_id: user.id)
       get :index, params: { user_id: user.id }
-      expect(assigns(:events)).to match(hosts.sort { |a, b| b.id <=> a.id })
+      expect(assigns(:host_events)).to match(host_events.sort { |a, b| b.id <=> a.id })
     end
 
     it 'index.html.erbに遷移すること' do
