@@ -7,7 +7,7 @@
       <% end %>
       <div class="card-body">
         <p class="card-text">
-          <%= link_to "@#{event.user.user_name}", user_path(event.user) %>
+          <%= link_to "@#{event.host.user_name}", user_path(event.host) %>
           <small class="text-muted ml-2"><%= event.updated_at.strftime("%Y/%m/%d") %></small>
         </p>
         <h2 class="card-title"><%= event.title %></h2>
