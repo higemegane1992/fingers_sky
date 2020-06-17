@@ -30,7 +30,7 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            <%= link_to "@#{@event.user.user_name}", user_path(@event.user) %>
+            <%= link_to "@#{@event.host.user_name}", user_path(@event.host) %>
             <small class="text-muted ml-2"><%= @event.updated_at.strftime("%Y/%m/%d") %></small>
           </p>
           <h2 class="card-title"><%= @event.title %></h2>
@@ -48,7 +48,7 @@
           <p class="card-text"><%= @event.address %></p>
           <div class="actions text-right">
             <% if user_signed_in? %>
-              <% if current_user == @event.user %>
+              <% if current_user == @event.host %>
                 <%= link_to edit_event_path, class: 'btn btn-primary' do %>
                   <i class="fas fa-edit mr-2"></i>編集する
                 <% end %>
@@ -92,7 +92,7 @@
       </div>
     </div>
     <% if user_signed_in? %>
-      <% if current_user == @event.user || @guests.include?(current_user) %>
+      <% if current_user == @event.host || @guests.include?(current_user) %>
         <div class="tab-pane fade" id="v-pills-participants" role="tabpanel" aria-labelledby="v-pills-participants-tab">
           <div class="card border shadow">
             <div class="card-header d-block d-md-none">

@@ -5,7 +5,7 @@ class HostsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @events = Event.where(user_id: params[:user_id]).order('id DESC').page(params[:page]).per(36)
+    @host_events = @user.host_events.order('id DESC').page(params[:page]).per(36)
     add_breadcrumb @user.user_name.to_s, user_path(@user)
     add_breadcrumb '主催イベント'
   end

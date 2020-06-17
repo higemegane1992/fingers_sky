@@ -42,9 +42,9 @@ describe Event do
       end
 
       it '未ログイン' do
-        event = build(:event, user: nil)
+        event = build(:event, host: nil)
         event.valid?
-        expect(event.errors[:user]).to include('を入力してください')
+        expect(event.errors[:host]).to include('を入力してください')
       end
     end
   end

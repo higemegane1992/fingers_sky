@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @disabled = if user_signed_in? && current_user == @event.user || @event.guests.include?(current_user)
+    @disabled = if user_signed_in? && current_user == @event.host || @event.guests.include?(current_user)
                   ''
                 else
                   'disabled'
