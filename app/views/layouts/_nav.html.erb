@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-secondary shadow">
+  <%= link_to 'Fingers Sky', root_path, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'ホーム', root_path, class: 'nav-link'%>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarEvent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          イベント
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarEvent">
+          <%= link_to 'イベント一覧', events_path, class: 'dropdown-item'%>
+          <%= link_to 'イベントの作成', new_event_path, class: 'dropdown-item'%>
+        </div>
+      </li>
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= link_to 'メッセージ', user_messages_path(current_user), class: 'nav-link'%>
+        <% end %> 
+      </li>
+    </ul>
+    <div class="ml-auto">
+      <% if user_signed_in? %>
+        <%= link_to user_path(current_user.id), method: :get, class: 'btn btn-outline-primary' do %>
+          <i class="fas fa-user-circle mr-2"></i><%= current_user.first_name %>
+        <% end %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, method: :get, class: 'btn btn-outline-primary' %>
+        <%= link_to "新規登録", new_user_registration_path, method: :get, class: 'btn btn-outline-primary' %>
+      <% end %>
+    </div>
+  </div>
+</nav>
