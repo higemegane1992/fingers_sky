@@ -6,6 +6,10 @@ body {
   margin-top: 71px !important;
 }
 
+.navbar-brand > img {
+  height: 30px;
+}
+
 .breadcrumb > li + li {
   padding-left: 0.5rem;
 }
