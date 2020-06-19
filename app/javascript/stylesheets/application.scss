@@ -3,7 +3,7 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 body {
-  margin-top: 71px !important;
+  margin-top: 58px !important;
 }
 
 .navbar-brand > img {
@@ -28,6 +28,6 @@ body {
 
 @include media-breakpoint-up(md) {
   .scrollspy {
-    max-height: calc(100vh - 237px);
+    max-height: calc(100vh - 224px);
   }
 }
