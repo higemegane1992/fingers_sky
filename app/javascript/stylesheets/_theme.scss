@@ -63,7 +63,7 @@ $success:       $teal !default;
 $info:          $cyan !default;
 $warning:       $green !default;
 $danger:        $orange !default;
-$light:         $gray-100 !default;
+$light:         $gray-400 !default;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -300,10 +300,10 @@ $h6-font-size:                $font-size-base * 1.05 !default;
 // $headings-line-height:        1.2 !default;
 // $headings-color:              null !default;
 
-// $display1-size:               6rem !default;
-// $display2-size:               5.5rem !default;
-// $display3-size:               4.5rem !default;
-// $display4-size:               3.5rem !default;
+  $display1-size:               3.5rem !default;
+  $display2-size:               3.0rem !default;
+  $display3-size:               2.5rem !default;
+  $display4-size:               2.0rem !default;
 
 // $display1-weight:             300 !default;
 // $display2-weight:             300 !default;

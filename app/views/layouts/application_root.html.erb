@@ -14,11 +14,7 @@
 
   <body>
     <%= render partial: "layouts/nav" %>
-    <%= render partial: "layouts/header" %>
-    <div class="container">
-      <div class="row">
-        <%= yield %>
-      </div>
-    </div>
+    <%= render partial: "layouts/header_root" %>
+      <%= yield %>
   </body>
 </html>

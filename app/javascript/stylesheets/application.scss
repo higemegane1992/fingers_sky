@@ -2,6 +2,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// Bootstrap
 body {
   margin-top: 58px !important;
 }
@@ -30,4 +31,10 @@ body {
   .scrollspy {
     max-height: calc(100vh - 224px);
   }
+}
+
+// Top Page
+#eye_cathing {
+  background: linear-gradient(90deg,#ffffffd9,#ffffff26),url(/images/eye_catching.jpg) no-repeat;
+  background-size: cover;
 }
