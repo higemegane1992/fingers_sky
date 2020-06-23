@@ -2,6 +2,6 @@
 
 class StaticsController < ApplicationController
   def index
-    render :layout => 'application_root'
+    render layout: 'application_root'
   end
 end
