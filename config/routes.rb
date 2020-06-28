@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :participants, only: %i[index create destroy]
+    collection do
+      get 'search'
+    end
   end
 
   resources :users, only: :show do
