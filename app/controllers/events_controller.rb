@@ -50,6 +50,13 @@ class EventsController < ApplicationController
     redirect_to events_path, notice: 'イベントが削除されました'
   end
 
+  def search
+    @events = Event.where('title LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.json
+    end
+  end
+
   private
 
   def correct_user

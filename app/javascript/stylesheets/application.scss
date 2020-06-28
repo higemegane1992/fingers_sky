@@ -38,3 +38,9 @@ body {
   background: linear-gradient(90deg,#ffffffd9,#ffffff26),url(/images/eye_catching.jpg) no-repeat;
   background-size: cover;
 }
+
+// Search Box
+#serch-results {
+  top: 38px;
+  z-index: 1;
+}
