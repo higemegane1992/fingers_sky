@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   def search
     @events = Event.where('title LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
-      format.json 
+      format.json
     end
   end
 
