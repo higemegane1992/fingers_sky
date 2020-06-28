@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'users/sessions#destroy'
   end
 
-  root 'statics#index'
+  root 'static_pages#index'
 
   resources :events do
     resources :participants, only: %i[index create destroy]
