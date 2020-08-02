@@ -2,26 +2,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-// Bootstrap
-body {
-  margin-top: 58px !important;
-}
-
-.navbar-brand > img {
-  height: 30px;
-}
-
-.breadcrumb > li + li {
-  padding-left: 0.5rem;
-}
-
-.breadcrumb > li + li::before {
-  display: inline-block;
-  padding-right: 0.5rem;
-  color: #b5acac;
-  content: "/";
-}
-
 .scrollspy {
   position: relative;
   overflow-y: auto;
@@ -31,16 +11,4 @@ body {
   .scrollspy {
     max-height: calc(100vh - 224px);
   }
-}
-
-// Top Page
-#eye_cathing {
-  background: linear-gradient(90deg,#ffffffd9,#ffffff26),url(/images/eye_catching.jpg) no-repeat;
-  background-size: cover;
-}
-
-// Search Box
-#serch-results {
-  top: 38px;
-  z-index: 1;
 }
