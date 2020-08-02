@@ -20,7 +20,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: 'fingers_sky'
+          family: 'fingers-sky'
           cluster-name: '${ECS_ARN}'
           service-name: 'test'
           container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
@@ -41,7 +41,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: 'fingers_sky'
+          family: 'fingers-sky'
           cluster-name: '${ECS_ARN}'
           service-name: 'test'
           container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
