@@ -33,7 +33,9 @@ class Search extends React.Component {
   render () {
     const { error, keyword, events } = this.state
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>Error: {error.message}</div>
+      );
     } else if (!keyword) {
       return (
         <div className="form-inline my-2 my-sm-0 position-relative">
