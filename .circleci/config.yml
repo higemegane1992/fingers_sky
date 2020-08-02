@@ -1,57 +1,47 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/fingers_sky
-    
-    docker:
-      - image: circleci/ruby:2.7.1-node
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: postgres
-    
-      - image: circleci/postgres:12-alpine
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: fingers_sky_test
-        
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
-            - rails-demo-
-
-      - run:
-          name: Install dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-
-      - run: sudo apt install -y postgresql-client || true
-
-      - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      - run:
-          name: Database Setup
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
-            bundle exec rails db:schema:load
-
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
-
-      - run:
-          name: RSpec
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-            bundle exec rspec
-
-      - store_test_results:
-          path: /tmp/test-results
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-ecs: circleci/aws-ecs@1.1.0
+workflows:
+  nginx-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./docker/nginx/Dockerfile
+          repo: nginx
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'fingers_sky'
+          cluster-name: '${ECS_ARN}'
+          service-name: 'test'
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
+  rails-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./docker/ruby/Dockerfile
+          repo: rails
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'fingers_sky'
+          cluster-name: '${ECS_ARN}'
+          service-name: 'test'
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
