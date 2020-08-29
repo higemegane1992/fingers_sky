@@ -30,8 +30,6 @@
 
 .env
 **/.keep
-
-/public/packs
 /public/packs-test
 /node_modules
 /yarn-error.log
