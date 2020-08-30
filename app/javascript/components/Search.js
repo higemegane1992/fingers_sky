@@ -52,7 +52,7 @@ class Search extends React.Component {
             value={keyword}
             onChange={(e) => {this.search(e)}}
           />
-          <div id="serch-results" className="card position-absolute w-100">
+          <div id="search-results" className="card position-absolute w-100">
             <ul className="list-group list-group-flush">
               <li className="list-group-item list-group-item-action">お探しのイベントは存在しません</li>
             </ul>
@@ -66,7 +66,7 @@ class Search extends React.Component {
             value={keyword}
             onChange={(e) => {this.search(e)}}
           />
-          <div id="serch-results" className="card position-absolute w-100">
+          <div id="search-results" className="card position-absolute w-100 overflow-auto">
             <div className="list-group list-group-flush">
               { events.map((event) => {
                 return (

@@ -22,7 +22,8 @@
   background-size: cover;
 }
 
-#serch-results {
+#search-results {
+  max-height: calc(100vh - 78px);
   top: 38px;
   z-index: 1;
 }
