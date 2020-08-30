@@ -23,7 +23,7 @@
 }
 
 #search-results {
-  max-height: calc(100vh - 78px);
+  max-height: calc(100vh - 124px);
   top: 38px;
   z-index: 1;
 }
