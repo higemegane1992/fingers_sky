@@ -70,7 +70,7 @@ class Search extends React.Component {
             <div className="list-group list-group-flush">
               { events.map((event) => {
                 return (
-                  <a href={event.url} className="list-group-item list-group-item-action">{event.title}</a>
+                  <a href={event.path} className="list-group-item list-group-item-action">{event.title}</a>
                 )
               }) }
             </div>

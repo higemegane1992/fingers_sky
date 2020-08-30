@@ -2,5 +2,5 @@
 
 json.events(@events) do |event|
   json.extract! event, :title
-  json.url event_url(event)
+  json.path event_path(event)
 end
